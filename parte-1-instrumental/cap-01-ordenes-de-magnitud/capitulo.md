@@ -28,7 +28,9 @@ de Hiroshima?**
 Es una pregunta rara porque parece imposible y no lo es. No hay ningún dato a
 mano. No sabes la masa de la nube, ni su temperatura, ni la termodinámica del
 aire húmedo. Y sin embargo, dentro de diez minutos vas a tener una respuesta
-que no se equivocará por más de un factor 5, sin haber consultado nada.
+que sitúa la energía en la década correcta, sin haber consultado nada. No un
+número exacto: la década. Al final del capítulo verás por qué prometer más que
+eso sería deshonesto, y por qué la década basta para casi todo.
 
 La habilidad que hace eso posible es la más rentable de todo el libro, y la
 razón es incómoda: en la mayoría de los problemas reales, **el paso que decide
@@ -164,14 +166,32 @@ tormenta va **unas setenta veces por encima**. Y no es una tormenta
 excepcional: es la tormenta de una tarde de agosto.
 
 Este es el momento en el que uno debería desconfiar, así que desconfiemos. El
-número es grande, pero la comparación es tramposa en un sentido que conviene
-decir en voz alta: la energía de la bomba se liberó en microsegundos y en unos
-cientos de metros; la de la tormenta, en media hora y en cien kilómetros
-cuadrados. La **potencia por unidad de volumen** difiere en unos veinte órdenes
-de magnitud. Una tormenta no destruye una ciudad por la misma razón que un
-radiador de 2 kW no la destruye tampoco: lo que hace daño no es la energía,
-es la densidad de potencia. Un buen orden de magnitud viene acompañado siempre
-de la pregunta *«¿energía de qué, en qué tiempo, en qué volumen?»*.
+número es grande, pero la comparación es tramposa, y conviene decir en voz alta
+por qué: la energía de la bomba se liberó en microsegundos y en unos cientos de
+metros; la de la tormenta, en media hora y en cien kilómetros cuadrados. No es
+lo mismo.
+
+La magnitud que decide el daño no es la energía, es la **densidad de potencia**,
+$E/(t\,V)$. Y como es una comparación importante, no la afirmemos: hagámosla.
+
+$$\frac{E}{tV}\bigg|_{\text{bomba}}
+\sim\frac{6{,}3\times10^{13}}{10^{-6}\cdot\tfrac43\pi(200)^3}
+\approx 2\times10^{12}\ \mathrm{W/m^3}$$
+
+$$\frac{E}{tV}\bigg|_{\text{tormenta}}
+\sim\frac{4{,}5\times10^{15}}{1800\cdot(10^{8}\cdot10^{4})}
+\approx 2{,}5\ \mathrm{W/m^3}$$
+
+Unos **doce órdenes de magnitud**. Y como todo en este capítulo, el número
+tiene su intervalo: moviendo la duración de la explosión entre $10^{-7}$ y
+$10^{-5}$ s, su radio entre 100 y 300 m, y la altura de la nube entre 1 y
+10 km, sale un rango de **10 a 13 décadas**. Doce es el centro, no una cifra
+exacta.
+
+Una tormenta no destruye una ciudad por la misma razón que un radiador de 2 kW
+tampoco la destruye: lo que hace daño no es la energía, es la prisa con la que
+se entrega. Un buen orden de magnitud viene acompañado siempre de la pregunta
+*«¿energía de qué, en qué tiempo, en qué volumen?»*.
 
 ### 4.2 Por qué esto funciona: la aritmética del error
 
@@ -291,7 +311,8 @@ factores = {"A": (1e8, 2.5), "h": (2e-2, 2.0),
 
 log_E = np.zeros(200_000)
 for centro, factor in factores.values():
-    log_E += np.log10(centro) + rng.normal(0.0, np.log10(factor), log_E.size)
+    b = np.log10(factor) / np.sqrt(2)        # Laplace: sigma = b*raiz(2)
+    log_E += np.log10(centro) + rng.laplace(0.0, b, log_E.size)
 
 E = 10**log_E
 p05, p50, p95 = np.percentile(E, [5, 50, 95])
@@ -302,27 +323,43 @@ print(f"factor P95/P5 = {p95/p05:.0f}   Hiroshimas = {p50/6.3e13:.0f}")
 Lo que imprime:
 
 ```text
-mediana 4.5e+15 J   P5 6.8e+14 J   P95 3.0e+16 J
-factor P95/P5 = 44   Hiroshimas = 71
+mediana 4.5e+15 J   P5 6.9e+14 J   P95 3.0e+16 J
+factor P95/P5 = 42   Hiroshimas = 72
+exceso de curtosis de log E: +1.540   (0 seria normal exacta)
 ```
 
 ![Propagación completa de la incertidumbre. Izquierda: la distribución es simétrica en $\log E$, no en $E$. Derecha: el 64 % de la varianza viene del área y el 36 % de la lluvia; las dos constantes tabuladas no aportan nada. Lo que hay que concluir: el resultado honesto no es un número, es «entre $7\times10^{14}$ y $3\times10^{16}$ J, con centro en $4{,}5\times10^{15}$».](figuras/fig_tormenta_mc.pdf)
 
 Dos cosas ocurrieron, y conviene detenerse en las dos.
 
-**La distribución es log-normal.** Simétrica en el exponente y con una cola
-larguísima a la derecha en el valor. Esto no es una casualidad de este
-problema: es el teorema central del límite actuando sobre $\log E=\sum\log x_i$.
-Cualquier cantidad que sea producto de muchos factores independientes tiende a
-ser log-normal, igual que cualquier cantidad que sea suma de muchos sumandos
-independientes tiende a ser normal. Los tamaños de las gotas de lluvia, los
-ingresos, los tamaños de los ficheros, la abundancia de especies: todo lo
-multiplicativo tiende a esa forma. Lo demostraremos en el capítulo 3; por ahora
-quédate con que **la campana de tu ignorancia vive en el exponente**.
+**La distribución es simétrica en el exponente**, con una cola larguísima a la
+derecha en el valor. Y aquí hay que tener cuidado con lo que se afirma, porque
+es fácil afirmar de más.
 
-**El intervalo del 90 % abarca un factor 44.** Que suena fatal hasta que
+La tentación es decir «es el teorema central del límite actuando sobre
+$\log E=\sum\log x_i$». Pero mira el tercer panel de la figura. Cada factor se
+ha sorteado de una distribución de Laplace —picuda y de colas pesadas— y con
+$n=4$ la suma **todavía no es normal**: el exceso de curtosis vale $+1{,}54$,
+y una normal lo tiene en cero. Con $n=20$ sí. Cuatro factores no son «muchos».
+
+Esto importa más de lo que parece. Si hubiéramos sorteado cada $\log x_i$ de
+una normal, la suma habría salido normal *exactamente*, para cualquier $n$, y
+el histograma no habría demostrado nada: la campana estaría metida en los
+supuestos, no emergiendo de ellos. **Un experimento que sólo puede confirmar lo
+que le has metido no es un experimento.** Es un error frecuente y difícil de
+ver, y volveremos a él en el capítulo 16.
+
+Lo que sí es cierto, y se demuestra en el capítulo 3 con sus condiciones: un
+producto de muchos factores independientes tiende a log-normal, igual que una
+suma de muchos sumandos independientes tiende a normal. Los tamaños de las
+gotas de lluvia, los ingresos, los tamaños de los ficheros, la abundancia de
+especies. Aquí, con cuatro factores, tenemos una **aproximación decente**, no
+un teorema. Quédate con que **la campana de tu ignorancia vive en el
+exponente**, y con que «tiende a» no es «es».
+
+**El intervalo del 90 % abarca un factor 42.** Que suena fatal hasta que
 recuerdas la alternativa: no tener ni idea. Y hay algo más importante: ese
-factor 44 es *honesto*. Es lo que de verdad sabemos. La tentación de escribir
+factor 42 es *honesto*. Es lo que de verdad sabemos. La tentación de escribir
 «$E=4{,}5\times10^{15}$ J» y quedarse tan anchos es exactamente el vicio contra
 el que el libro entero está escrito.
 

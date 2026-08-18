@@ -17,7 +17,7 @@ Estás en una terraza en agosto. Se está montando una tormenta.
 \vspace{1em}
 
 No hay ningún dato a mano. Y aun así, en diez minutos tendremos una respuesta
-que no falla por más de un factor 5.
+en la década correcta.
 
 # Antes de calcular
 
@@ -119,7 +119,7 @@ productivo y no lo es.
 
 \vspace{0.8em}
 
-\alert{Densidad de potencia: 20 órdenes de magnitud de diferencia.}
+\alert{Densidad de potencia: unas 12 décadas de diferencia.}
 Lo que hace daño no es la energía.
 
 # Cuándo falla

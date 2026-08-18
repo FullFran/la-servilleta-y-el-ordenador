@@ -1,0 +1,38 @@
+name: Problema nuevo
+description: Proponer un ejercicio para algún capítulo
+title: "[problema] "
+labels: ["contenido"]
+body:
+  - type: input
+    id: capitulo
+    attributes:
+      label: Para qué capítulo
+    validations:
+      required: true
+  - type: dropdown
+    id: categoria
+    attributes:
+      label: Categoría
+      options: [C calentamiento, E estimación, D derivación, M modelado, P programación, X experimento computacional, T detective, F Feynman, R mundo real, Z extensión]
+    validations:
+      required: true
+  - type: dropdown
+    id: dificultad
+    attributes:
+      label: Dificultad
+      options: ["sin marca (directo)", "○ requiere pensar", "◐ intermedio", "● cuesta una tarde", "★ abierto, sin solución cerrada"]
+    validations:
+      required: true
+  - type: textarea
+    id: enunciado
+    attributes:
+      label: Enunciado
+    validations:
+      required: true
+  - type: textarea
+    id: solucion
+    attributes:
+      label: Solución
+      description: "Si es ● o ★, hacen falta también Pista 1 y Pista 2. Ninguna de las dos puede contener la respuesta."
+    validations:
+      required: true

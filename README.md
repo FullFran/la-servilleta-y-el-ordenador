@@ -2,6 +2,19 @@
 
 **Un entrenamiento en estimación, modelado y experimentación computacional.**
 
+> **Trabajo en curso — v0.1.** El libro está completo y compila, pero **no está
+> auditado entero**: son 684 páginas y la revisión ha sido parcial. Sirve como
+> material de entrenamiento y como referencia de trabajo; todavía no para
+> citarlo como fuente autoritativa. Las erratas encontradas están en
+> [ERRATA.md](ERRATA.md) y lo que falta por revisar, en las issues.
+>
+> Se escribió con ayuda de IA. Decirlo no es un descargo: es coherente con el
+> capítulo III.13, que va exactamente de eso. Lo que sí está verificado a mano
+> se detalla más abajo, y lo que no, también.
+>
+> **Encontrar un error es la contribución más valiosa.** Las tres primeras
+> erratas las encontró un lector. Ver [CONTRIBUTING.md](CONTRIBUTING.md).
+
 Un libro para alguien con formación en física que quiere recuperar y
 sistematizar su capacidad de enfrentarse a un fenómeno nuevo: entender qué
 importa, construir un modelo útil, aproximarlo, simularlo, cuantificar su
@@ -165,8 +178,27 @@ construir modelos debería enseñar también su propio modelo:
 
 ## Estado
 
-**Primera versión completa y compilable.** Todo el texto está escrito, todas
-las figuras generadas y todos los PDF compilan.
+**v0.1.** Todo el texto está escrito, todas las figuras generadas y todos los
+PDF compilan. Lo que eso significa y lo que no:
+
+**Verificado**
+
+* Cada figura la genera un script versionado; ninguna imagen tiene origen
+  desconocido.
+* Los números citados en los bloques de salida se contrastan automáticamente
+  contra lo que imprimen los scripts (`make verificar`).
+* Ningún carácter se pierde al compilar (`make glifos`), tras un fallo que
+  borraba 1500 símbolos en silencio.
+* Las tres erratas de [ERRATA.md](ERRATA.md), verificadas y corregidas.
+
+**No verificado todavía**
+
+* Las derivaciones y los órdenes de magnitud, capítulo a capítulo.
+* Que cada una de las 101 referencias exista y diga lo que se le atribuye.
+* Los números citados en la prosa, fuera de los bloques de salida.
+
+Las tres auditorías pendientes están abiertas como issues. Que estén a la vista
+es información útil para el lector: dice exactamente cuánto fiarse de qué.
 
 Lo que queda está en las **issues** del repositorio, con el contexto suficiente
 para retomarlo dentro de unos meses: referencias cruzadas, problemas de las

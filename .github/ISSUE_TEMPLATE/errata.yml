@@ -1,0 +1,42 @@
+name: Errata
+description: Un error en el texto, en una ecuación, en un número o en una referencia
+title: "[errata] "
+labels: ["errata"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        No hace falta que estés seguro. Una sospecha bien argumentada vale.
+  - type: input
+    id: donde
+    attributes:
+      label: Dónde
+      description: Fichero y línea, o capítulo y sección
+      placeholder: parte-1-instrumental/cap-01-ordenes-de-magnitud/capitulo.md:170
+    validations:
+      required: true
+  - type: textarea
+    id: dice
+    attributes:
+      label: Qué dice
+      description: Cítalo literal
+    validations:
+      required: true
+  - type: textarea
+    id: porque
+    attributes:
+      label: Por qué está mal
+      description: El argumento, el cálculo o la fuente. Corto está bien; comprobable es lo que importa.
+    validations:
+      required: true
+  - type: textarea
+    id: deberia
+    attributes:
+      label: Qué debería decir
+      description: Si lo tienes claro. Si no, deja esto en blanco.
+  - type: checkboxes
+    id: numero
+    attributes:
+      label: Si es un número
+      options:
+        - label: He mirado si sale de un script de `codigo/`. Corregirlo exige tocar el script, no solo el texto.

@@ -1,0 +1,30 @@
+name: Fallo de compilación
+description: El libro no compila, o compila mal
+title: "[build] "
+labels: ["herramientas"]
+body:
+  - type: textarea
+    id: orden
+    attributes:
+      label: Qué orden ejecutaste
+      placeholder: ./construir.sh todo
+    validations:
+      required: true
+  - type: textarea
+    id: salida
+    attributes:
+      label: Qué salió
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: glifos
+    attributes:
+      label: Salida de `make glifos`
+      description: Detecta los caracteres que XeTeX descarta en silencio, que es el fallo más difícil de ver.
+      render: shell
+  - type: input
+    id: entorno
+    attributes:
+      label: Entorno
+      placeholder: "Linux, pandoc 3.10, tectonic 0.17, DejaVu Sans Mono instalada"
