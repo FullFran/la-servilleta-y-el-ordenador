@@ -1,0 +1,27 @@
+# Entorno de Python
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Intermedios de compilación
+.tmp/
+
+# Todo lo que sale de `./construir.sh todo`.
+# El criterio: el repositorio guarda lo que no se puede regenerar. Las figuras,
+# los PDF y la edición web salen de una orden, y como son binarios no se
+# diferencian bien: comprometerlos haría crecer el historial ~60 MB por cada
+# recompilación. Los entregables van adjuntos a la release.
+salida/*.pdf
+salida/*.html
+**/figuras/*.pdf
+**/figuras/*.png
+parte-*/cap-*/*.pdf
+interludios/*/*.pdf
+**/slides/*.pdf
+
+# Caché de herramientas del entorno, ajena al libro
+.atl/
+
+# Sistema
+.DS_Store

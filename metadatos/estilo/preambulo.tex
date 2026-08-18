@@ -1,0 +1,174 @@
+% ---------------------------------------------------------------------------
+% Preámbulo común del libro. Se inyecta con  pandoc -H
+% Define la identidad visual: cajas pedagógicas, colores y microtipografía.
+% ---------------------------------------------------------------------------
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{microtype}
+
+% --- Símbolos de dificultad y de nivel -------------------------------------
+% Latin Modern no tiene glifos para ○ ◐ ● ★ ◆, y XeTeX los descarta EN SILENCIO:
+% el marcador de dificultad de cada problema desaparecía del PDF sin aviso.
+% Se mapean a equivalentes matemáticos que sí existen.
+\usepackage[nointegrals]{wasysym}
+\usepackage{newunicodechar}
+\newunicodechar{○}{\ensuremath{\Circle}}
+\newunicodechar{◐}{\ensuremath{\LEFTcircle}}
+\newunicodechar{●}{\ensuremath{\CIRCLE}}
+% \bigstar y \blacklozenge NO valen aquí: la plantilla de pandoc carga
+% unicode-math, que los reasigna a caracteres que la fuente matemática no tiene.
+% Los dingbats de pifont son independientes de la fuente matemática.
+\usepackage{pifont}
+\newunicodechar{★}{\ding{72}}
+\newunicodechar{◆}{\ding{117}}
+
+% --- Fuente monoespaciada con cobertura Unicode ----------------------------
+% Los diagramas ASCII y las plantillas del libro usan caracteres de dibujo de
+% cajas (─ │ ├ └ ┬) y casillas (□). Latin Modern Mono no los tiene y XeTeX los
+% descarta EN SILENCIO: los diagramas salían desmontados sin ningún aviso.
+% DejaVu Sans Mono sí los cubre. Si no está instalada, se sigue sin ella.
+\IfFontExistsTF{DejaVu Sans Mono}{%
+  \setmonofont{DejaVu Sans Mono}[Scale=MatchLowercase]%
+}{}
+
+% Los mismos caracteres, cuando aparecen fuera de un bloque de código.
+% Los cuadrados de Zapf Dingbats llevan sombra; para una lista que se imprime
+% y se marca conviene una caja limpia, dibujada y por tanto independiente de la
+% fuente.
+\newcommand{\casilla}{\raisebox{-0.08em}{{\setlength{\fboxsep}{0pt}%
+  \framebox[0.72em]{\rule{0pt}{0.72em}}}}}
+\newunicodechar{□}{\casilla}
+\newunicodechar{✓}{\ding{51}}
+\newunicodechar{⁻}{\ensuremath{^{-}}}
+\newunicodechar{⁰}{\ensuremath{^{0}}}
+\newunicodechar{⁴}{\ensuremath{^{4}}}
+\newunicodechar{⁵}{\ensuremath{^{5}}}
+\newunicodechar{⁶}{\ensuremath{^{6}}}
+\newunicodechar{₀}{\ensuremath{_{0}}}
+\newunicodechar{₂}{\ensuremath{_{2}}}
+\newunicodechar{ᵢ}{\ensuremath{_{i}}}
+\newunicodechar{ⱼ}{\ensuremath{_{j}}}
+\newunicodechar{ṁ}{\ensuremath{\dot m}}
+
+% Letras griegas y símbolos que aparecen en el texto corrido, fuera de modo
+% matemático. Latin Modern Roman no las tiene y también se caían en silencio.
+% Nada de upgreek: choca con unicode-math + microtype a través de mt-eur.cfg.
+\newunicodechar{μ}{\ensuremath{\mu}}
+\newunicodechar{σ}{\ensuremath{\sigma}}
+\newunicodechar{π}{\ensuremath{\pi}}
+\newunicodechar{ρ}{\ensuremath{\rho}}
+\newunicodechar{α}{\ensuremath{\alpha}}
+\newunicodechar{τ}{\ensuremath{\tau}}
+\newunicodechar{χ}{\ensuremath{\chi}}
+\newunicodechar{ε}{\ensuremath{\varepsilon}}
+\newunicodechar{γ}{\ensuremath{\gamma}}
+\newunicodechar{Δ}{\ensuremath{\Delta}}
+\newunicodechar{Σ}{\ensuremath{\Sigma}}
+\newunicodechar{∝}{\ensuremath{\propto}}
+\newunicodechar{∞}{\ensuremath{\infty}}
+\newunicodechar{≪}{\ensuremath{\ll}}
+\newunicodechar{∼}{\ensuremath{\sim}}
+\newunicodechar{⟨}{\ensuremath{\langle}}
+\newunicodechar{⟩}{\ensuremath{\rangle}}
+
+% Operadores que también aparecen sueltos en el texto corrido.
+\newunicodechar{≈}{\ensuremath{\approx}}
+\newunicodechar{≥}{\ensuremath{\geq}}
+\newunicodechar{≤}{\ensuremath{\leq}}
+\newunicodechar{÷}{\ensuremath{\div}}
+\newunicodechar{−}{\ensuremath{-}}
+\newunicodechar{√}{\ensuremath{\surd}}
+\newunicodechar{≠}{\ensuremath{\neq}}
+
+% Los caracteres de dibujo de cajas sólo aparecen dentro de bloques literales,
+% donde los cubre DejaVu Sans Mono. Por si alguna vez aparecen en texto corrido,
+% se fuerza la fuente monoespaciada. \symbol no vuelve a pasar por newunicodechar,
+% así que no hay recursión.
+\newunicodechar{─}{{\ttfamily\symbol{"2500}}}
+\newunicodechar{│}{{\ttfamily\symbol{"2502}}}
+\newunicodechar{┌}{{\ttfamily\symbol{"250C}}}
+\newunicodechar{┐}{{\ttfamily\symbol{"2510}}}
+\newunicodechar{└}{{\ttfamily\symbol{"2514}}}
+\newunicodechar{┘}{{\ttfamily\symbol{"2518}}}
+\newunicodechar{├}{{\ttfamily\symbol{"251C}}}
+\newunicodechar{┤}{{\ttfamily\symbol{"2524}}}
+\newunicodechar{┬}{{\ttfamily\symbol{"252C}}}
+\newunicodechar{┴}{{\ttfamily\symbol{"2534}}}
+\newunicodechar{┼}{{\ttfamily\symbol{"253C}}}
+
+% El interlineado del cuerpo separa las líneas de los diagramas ASCII y rompe
+% los trazos verticales. Dentro de un bloque literal se vuelve al natural.
+\usepackage{etoolbox}
+\AtBeginEnvironment{verbatim}{\setstretch{1}}
+\AtBeginEnvironment{Shaded}{\setstretch{1}}
+
+% --- Paleta (idéntica a herramientas/estilo_libro.py) ----------------------
+\definecolor{tinta}{HTML}{1B2A41}
+\definecolor{azul}{HTML}{2F6FA8}
+\definecolor{rojo}{HTML}{C1443C}
+\definecolor{verde}{HTML}{3F8F6B}
+\definecolor{ocre}{HTML}{D99A2B}
+\definecolor{morado}{HTML}{7D5BA6}
+\definecolor{tealc}{HTML}{3A8FA0}
+\definecolor{grisc}{HTML}{8A94A6}
+\definecolor{papel}{HTML}{FBFAF7}
+\definecolor{claro}{HTML}{E8ECF2}
+
+% hyperref lo carga la plantilla de pandoc DESPUÉS de este bloque:
+% por eso los colores de enlace se fijan al empezar el documento.
+\AtBeginDocument{\hypersetup{colorlinks=true,linkcolor=azul,urlcolor=azul,citecolor=verde}}
+
+% --- Estilo base de todas las cajas ---------------------------------------
+\tcbset{
+  cajalibro/.style={
+    enhanced, breakable, sharp corners=downhill,
+    boxrule=0pt, leftrule=2.2pt, toprule=0pt, bottomrule=0pt, rightrule=0pt,
+    left=8pt, right=8pt, top=7pt, bottom=7pt,
+  }
+}
+
+% Rótulo de cabecera de caja. Se inserta como contenido, no como "title":
+% el mecanismo de títulos de tcolorbox no sobrevive bien a los cortes de
+% página de las cajas breakable.
+\newcommand{\cajatitulo}[2]{%
+  {\bfseries\sffamily\small\textcolor{#1}{#2}}\par\smallskip}
+
+\newtcolorbox{cajapregunta}{cajalibro, colback=azul!6, colframe=azul,
+  before upper={\cajatitulo{azul}{UNA PREGUNTA}}}
+\newtcolorbox{cajaantes}{cajalibro, colback=ocre!8, colframe=ocre,
+  before upper={\cajatitulo{ocre!80!black}{ANTES DE CALCULAR}}}
+\newtcolorbox{cajaherramientas}{cajalibro, colback=claro, colframe=tinta,
+  before upper={\cajatitulo{tinta}{CAJA DE HERRAMIENTAS MATEMÁTICA}}}
+\newtcolorbox{cajahistoria}{cajalibro, colback=verde!6, colframe=verde,
+  before upper={\cajatitulo{verde!60!black}{HISTORIA}}}
+\newtcolorbox{cajaexplica}{cajalibro, colback=morado!6, colframe=morado,
+  before upper={\cajatitulo{morado}{EXPLÍCALO SIN ESCONDERTE DETRÁS DE LAS ECUACIONES}}}
+\newtcolorbox{cajaesencial}{cajalibro, colback=tinta!6, colframe=tinta,
+  before upper={\cajatitulo{tinta}{LO ESENCIAL}}}
+\newtcolorbox{cajaabierto}{cajalibro, colback=tealc!7, colframe=tealc,
+  before upper={\cajatitulo{tealc!70!black}{PREGUNTAS QUE QUEDAN ABIERTAS}}}
+\newtcolorbox{cajaexperimento}{cajalibro, colback=azul!5, colframe=azul!70!black,
+  before upper={\cajatitulo{azul!70!black}{EXPERIMENTO COMPUTACIONAL}}}
+\newtcolorbox{cajaaviso}{cajalibro, colback=rojo!6, colframe=rojo,
+  before upper={\cajatitulo{rojo}{TRAMPA}}}
+\newtcolorbox{cajasupuestos}{cajalibro, colback=grisc!10, colframe=grisc,
+  before upper={\cajatitulo{tinta}{¿QUÉ ESTAMOS SUPONIENDO?}}}
+\newtcolorbox{cajafalla}{cajalibro, colback=rojo!5, colframe=rojo!70!black,
+  before upper={\cajatitulo{rojo!70!black}{¿CUÁNDO FALLA?}}}
+\newtcolorbox{cajaia}{cajalibro, colback=morado!5, colframe=morado!70!black,
+  before upper={\cajatitulo{morado!70!black}{PROTOCOLO CON IA}}}
+\newtcolorbox{cajajuega}{cajalibro, colback=ocre!6, colframe=ocre!80!black,
+  before upper={\cajatitulo{ocre!60!black}{JUEGA CON EL MODELO}}}
+\newtcolorbox{cajanumero}{cajalibro, colback=claro, colframe=grisc,
+  before upper={\cajatitulo{tinta}{NÚMEROS QUE CONVIENE SABERSE}}}
+
+% Cita destacada, sin caja
+\newenvironment{citadestacada}
+  {\begin{quote}\itshape\color{tinta!85}}
+  {\end{quote}}
+
+% Figuras: pie en gris y pequeño
+\usepackage{caption}
+\captionsetup{font=small, labelfont={bf,color=tinta}, textfont={color=tinta!80}}

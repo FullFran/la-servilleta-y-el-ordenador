@@ -1,0 +1,8 @@
+lang: es-ES
+aspectratio: 169
+fontsize: 11pt
+colorlinks: true
+section-titles: false
+theme: metropolis
+classoption:
+  - t

@@ -1,0 +1,15 @@
+lang: es-ES
+documentclass: scrartcl
+classoption:
+  - DIV=11
+  - fontsize=11pt
+geometry:
+  - a4paper
+  - margin=2.6cm
+linestretch: 1.12
+colorlinks: true
+toc: true
+toc-depth: 2
+numbersections: false   # los títulos ya llevan su propio esquema (3.2, II.4…)
+figPrefix: ["figura", "figuras"]
+eqnPrefix: ["ecuación", "ecuaciones"]

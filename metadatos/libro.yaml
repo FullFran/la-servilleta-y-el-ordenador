@@ -1,0 +1,22 @@
+lang: es-ES
+documentclass: scrbook
+classoption:
+  - DIV=11
+  - fontsize=11pt
+  - twoside
+  - open=right
+geometry:
+  - a4paper
+  - inner=3.0cm
+  - outer=2.4cm
+  - top=2.6cm
+  - bottom=2.8cm
+linestretch: 1.12
+colorlinks: true
+toc: true
+toc-depth: 1
+# La numeración automática se desactiva a propósito: los títulos ya llevan su
+# propio esquema (Capítulo 7, II.3, III.11), que es el que usan las referencias
+# cruzadas del texto.
+numbersections: false
+top-level-division: chapter

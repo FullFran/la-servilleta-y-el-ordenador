@@ -1,0 +1,107 @@
+% Preámbulo de las diapositivas
+\usepackage{amsmath,amssymb}
+
+% --- Símbolos de dificultad y de nivel -------------------------------------
+% Latin Modern no tiene glifos para ○ ◐ ● ★ ◆, y XeTeX los descarta EN SILENCIO:
+% el marcador de dificultad de cada problema desaparecía del PDF sin aviso.
+% Se mapean a equivalentes matemáticos que sí existen.
+\usepackage[nointegrals]{wasysym}
+\usepackage{newunicodechar}
+\newunicodechar{○}{\ensuremath{\Circle}}
+\newunicodechar{◐}{\ensuremath{\LEFTcircle}}
+\newunicodechar{●}{\ensuremath{\CIRCLE}}
+% \bigstar y \blacklozenge NO valen aquí: la plantilla de pandoc carga
+% unicode-math, que los reasigna a caracteres que la fuente matemática no tiene.
+% Los dingbats de pifont son independientes de la fuente matemática.
+\usepackage{pifont}
+\newunicodechar{★}{\ding{72}}
+\newunicodechar{◆}{\ding{117}}
+
+% --- Fuente monoespaciada con cobertura Unicode ----------------------------
+% Los diagramas ASCII y las plantillas del libro usan caracteres de dibujo de
+% cajas (─ │ ├ └ ┬) y casillas (□). Latin Modern Mono no los tiene y XeTeX los
+% descarta EN SILENCIO: los diagramas salían desmontados sin ningún aviso.
+% DejaVu Sans Mono sí los cubre. Si no está instalada, se sigue sin ella.
+\IfFontExistsTF{DejaVu Sans Mono}{%
+  \setmonofont{DejaVu Sans Mono}[Scale=MatchLowercase]%
+}{}
+
+% Los mismos caracteres, cuando aparecen fuera de un bloque de código.
+\newunicodechar{□}{\ding{113}}
+\newunicodechar{✓}{\ding{51}}
+\newunicodechar{⁻}{\ensuremath{^{-}}}
+\newunicodechar{⁰}{\ensuremath{^{0}}}
+\newunicodechar{⁴}{\ensuremath{^{4}}}
+\newunicodechar{⁵}{\ensuremath{^{5}}}
+\newunicodechar{⁶}{\ensuremath{^{6}}}
+\newunicodechar{₀}{\ensuremath{_{0}}}
+\newunicodechar{₂}{\ensuremath{_{2}}}
+\newunicodechar{ᵢ}{\ensuremath{_{i}}}
+\newunicodechar{ⱼ}{\ensuremath{_{j}}}
+\newunicodechar{ṁ}{\ensuremath{\dot m}}
+
+% Letras griegas y símbolos que aparecen en el texto corrido, fuera de modo
+% matemático. Latin Modern Roman no las tiene y también se caían en silencio.
+% Nada de upgreek: choca con unicode-math + microtype a través de mt-eur.cfg.
+\newunicodechar{μ}{\ensuremath{\mu}}
+\newunicodechar{σ}{\ensuremath{\sigma}}
+\newunicodechar{π}{\ensuremath{\pi}}
+\newunicodechar{ρ}{\ensuremath{\rho}}
+\newunicodechar{α}{\ensuremath{\alpha}}
+\newunicodechar{τ}{\ensuremath{\tau}}
+\newunicodechar{χ}{\ensuremath{\chi}}
+\newunicodechar{ε}{\ensuremath{\varepsilon}}
+\newunicodechar{γ}{\ensuremath{\gamma}}
+\newunicodechar{Δ}{\ensuremath{\Delta}}
+\newunicodechar{Σ}{\ensuremath{\Sigma}}
+\newunicodechar{∝}{\ensuremath{\propto}}
+\newunicodechar{∞}{\ensuremath{\infty}}
+\newunicodechar{≪}{\ensuremath{\ll}}
+\newunicodechar{∼}{\ensuremath{\sim}}
+\newunicodechar{⟨}{\ensuremath{\langle}}
+\newunicodechar{⟩}{\ensuremath{\rangle}}
+
+% Operadores que también aparecen sueltos en el texto corrido.
+\newunicodechar{≈}{\ensuremath{\approx}}
+\newunicodechar{≥}{\ensuremath{\geq}}
+\newunicodechar{≤}{\ensuremath{\leq}}
+\newunicodechar{÷}{\ensuremath{\div}}
+\newunicodechar{−}{\ensuremath{-}}
+\newunicodechar{√}{\ensuremath{\surd}}
+\newunicodechar{≠}{\ensuremath{\neq}}
+
+% Los caracteres de dibujo de cajas sólo aparecen dentro de bloques literales,
+% donde los cubre DejaVu Sans Mono. Por si alguna vez aparecen en texto corrido,
+% se fuerza la fuente monoespaciada. \symbol no vuelve a pasar por newunicodechar,
+% así que no hay recursión.
+\newunicodechar{─}{{\ttfamily\symbol{"2500}}}
+\newunicodechar{│}{{\ttfamily\symbol{"2502}}}
+\newunicodechar{┌}{{\ttfamily\symbol{"250C}}}
+\newunicodechar{┐}{{\ttfamily\symbol{"2510}}}
+\newunicodechar{└}{{\ttfamily\symbol{"2514}}}
+\newunicodechar{┘}{{\ttfamily\symbol{"2518}}}
+\newunicodechar{├}{{\ttfamily\symbol{"251C}}}
+\newunicodechar{┤}{{\ttfamily\symbol{"2524}}}
+\newunicodechar{┬}{{\ttfamily\symbol{"252C}}}
+\newunicodechar{┴}{{\ttfamily\symbol{"2534}}}
+\newunicodechar{┼}{{\ttfamily\symbol{"253C}}}
+\definecolor{tinta}{HTML}{1B2A41}
+\definecolor{azul}{HTML}{2F6FA8}
+\definecolor{rojo}{HTML}{C1443C}
+\definecolor{verde}{HTML}{3F8F6B}
+\definecolor{ocre}{HTML}{D99A2B}
+\definecolor{grisc}{HTML}{8A94A6}
+\definecolor{papel}{HTML}{FBFAF7}
+\setbeamercolor{normal text}{fg=tinta,bg=papel}
+\setbeamercolor{alerted text}{fg=rojo}
+\setbeamercolor{example text}{fg=verde}
+\setbeamercolor{structure}{fg=azul}
+\setbeamercolor{frametitle}{fg=papel,bg=tinta}
+\setbeamercolor{title}{fg=tinta}
+\setbeamercolor{progress bar}{fg=azul}
+\setbeamerfont{frametitle}{size=\large,series=\bfseries}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{itemize items}[circle]
+\setbeamertemplate{footline}{%
+  \hbox{\begin{beamercolorbox}[wd=\paperwidth,ht=2.4ex,dp=1.2ex,leftskip=.3cm,rightskip=.3cm]{}%
+  \tiny\color{grisc}\insertshorttitle\hfill\insertframenumber\end{beamercolorbox}}}
