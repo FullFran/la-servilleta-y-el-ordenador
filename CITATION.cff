@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "Si usas este libro, cítalo así."
+title: "La servilleta y el ordenador: un entrenamiento en estimación, modelado y experimentación computacional"
+abstract: >-
+  Libro abierto de entrenamiento en resolución de problemas científicos,
+  modelado matemático y pensamiento computacional. 43 capítulos, 8 interludios
+  históricos y 7 apéndices. Toda figura la genera un script versionado con
+  semilla fija; toda afirmación histórica declara su nivel de verificación.
+type: book
+authors:
+  - family-names: "BlakIA"
+    given-names: "Fran"
+    alias: "FullFran"
+repository-code: "https://github.com/FullFran/la-servilleta-y-el-ordenador"
+url: "https://github.com/FullFran/la-servilleta-y-el-ordenador"
+version: "0.1"
+date-released: "2026-08-18"
+license: CC-BY-SA-4.0
+languages:
+  - spa
+keywords:
+  - estimación
+  - modelado matemático
+  - análisis dimensional
+  - método de Monte Carlo
+  - experimentación computacional
+  - reproducibilidad
+  - didáctica de la física

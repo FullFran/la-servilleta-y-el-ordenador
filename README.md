@@ -180,4 +180,36 @@ adjuntos a cada release.
 
 ## Licencia
 
-Pendiente de decidir por el autor.
+El repositorio mezcla dos cosas con necesidades distintas, así que lleva dos
+licencias:
+
+| Qué | Licencia | Qué puedes hacer |
+|---|---|---|
+| **El texto del libro** — capítulos, problemas, soluciones, figuras, bibliografía | [CC BY-SA 4.0](LICENSE) | Copiarlo, repartirlo en clase, traducirlo, adaptarlo y hasta venderlo, **citando la fuente** y publicando lo que derives con esta misma licencia |
+| **El código** — scripts de figura, herramientas, cadena de compilación | [MIT](LICENSE-CODE) | Lo que quieras, incluido uso comercial, conservando el aviso de copyright |
+
+### Por qué esta combinación
+
+**Para que se pueda usar en clase sin dudas.** Un profesor —de instituto, de
+universidad pública o privada, de una academia— puede repartir un capítulo,
+proyectarlo o adaptarlo sin preguntar nada a nadie. Una licencia «no comercial»
+habría dejado ese caso en el aire, y ese caso es justo el que importa.
+
+**Para que nadie pueda apropiárselo.** La cláusula de atribución obliga a
+decir de dónde sale, y la de *share-alike* obliga a que cualquier versión
+derivada salga también libre. Se puede vender una copia, sí; lo que no se puede
+es encerrarla, firmarla como propia ni impedir que otro la reparta gratis. Ese
+es el mecanismo que de verdad protege un libro abierto, no la prohibición de
+cobrar.
+
+**El código va en MIT** porque las licencias Creative Commons no están
+pensadas para software —lo dice la propia Creative Commons— y porque los
+scripts que dibujan una figura de matplotlib son más útiles sueltos que atados.
+
+### Cómo citarlo
+
+> BlakIA, F. (2026). *La servilleta y el ordenador: un entrenamiento en
+> estimación, modelado y experimentación computacional* (v0.1).
+> https://github.com/FullFran/la-servilleta-y-el-ordenador
+
+Hay un `CITATION.cff` en la raíz por si tu gestor bibliográfico lo lee solo.
