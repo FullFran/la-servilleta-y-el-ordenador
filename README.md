@@ -168,14 +168,13 @@ construir modelos debería enseñar también su propio modelo:
 **Primera versión completa y compilable.** Todo el texto está escrito, todas
 las figuras generadas y todos los PDF compilan.
 
-Lo que queda para la siguiente pasada:
+Lo que queda está en las **issues** del repositorio, con el contexto suficiente
+para retomarlo dentro de unos meses: referencias cruzadas, problemas de las
+Partes II y III, pistas graduadas fuera de la Parte I, revisión histórica fuente
+por fuente, datos medidos de verdad y la licencia.
 
-* Hilar más las referencias cruzadas entre capítulos.
-* Ampliar los problemas de la Parte II y III, que ahora son más breves que los
-  de la Parte I, y llevarles el sistema de pistas graduadas que ya tiene la
-  Parte I completa.
-* Añadir datos reales medidos por el lector en los experimentos que lo piden.
-* Una revisión de verificación histórica adicional, fuente por fuente.
+Los PDF y la edición web no se versionan —salen de `./construir.sh todo`—; van
+adjuntos a cada release.
 
 ---
 
